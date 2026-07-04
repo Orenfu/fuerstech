@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Oren Fuerst | Fuerstech — AI · Fintech · Robotics · Healthtech</title>
+<meta name="description" content="Dr. Oren Fuerst — inventor, entrepreneur and strategist at the intersection of AI, Fintech, Robotics and Healthtech. Founder & CEO of DarioHealth (NASDAQ: DRIO), former Director of Columbia Business School's Technology Strategy and Valuation Program, Yale ICF faculty.">
+<meta property="og:title" content="Dr. Oren Fuerst | Fuerstech — AI · Fintech · Robotics · Healthtech">
+<meta property="og:description" content="Inventor · Entrepreneur · Strategist. Founder & CEO, DarioHealth (NASDAQ: DRIO). Columbia Business School · Yale ICF. Advisory at the frontier of AI, Fintech, Robotics & Healthtech.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e13;
+    --bg-panel:#12151d;
+    --bg-panel-2:#171b26;
+    --ink:#ece8dd;
+    --ink-dim:#a7adba;
+    --ink-faint:#6b7280;
+    --brass:#c39a5a;
+    --brass-bright:#e0b876;
+    --brass-dim:#7c6438;
+    --sage:#7fa084;
+    --line:rgba(236,232,221,0.10);
+    --line-strong:rgba(236,232,221,0.18);
+    --radius:2px;
+    --maxw:1180px;
+    --serif:"Space Grotesk", "Inter", sans-serif;
+    --sans:"Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:"JetBrains Mono", "SF Mono", monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--brass-dim);display:inline-block;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:500; margin:0; letter-spacing:-0.01em;}
+  .fade{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
+  .fade.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- ticker ---------- */
+  .ticker-bar{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    height:34px; background:var(--bg-panel-2);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    display:flex; align-items:center;
+  }
+  .ticker-track{
+    display:flex; white-space:nowrap;
+    animation:ticker 42s linear infinite;
+    will-change:transform;
+  }
+  .ticker-track span{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em;
+    color:var(--ink-dim); padding:0 22px;
+    display:inline-flex; align-items:center; gap:22px;
+  }
+  .ticker-track span b{color:var(--brass); font-weight:500;}
+  @keyframes ticker{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:34px; z-index:90;
+    background:rgba(11,14,19,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .wordmark{font-family:var(--serif); font-size:19px; letter-spacing:0.01em;}
+  .wordmark span{color:var(--brass);}
+  .nav-links{display:flex; gap:30px; font-size:13.5px; letter-spacing:0.02em;}
+  .nav-links a{color:var(--ink-dim); transition:color .2s;}
+  .nav-links a:hover{color:var(--brass-bright);}
+  .nav-cta{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.06em;
+    border:1px solid var(--brass-dim); padding:9px 16px; color:var(--brass-bright);
+    transition:all .2s;
+  }
+  .nav-cta:hover{background:var(--brass); color:var(--bg); border-color:var(--brass);}
+  .nav-toggle{display:none; background:none; border:0; color:var(--ink); font-size:22px; cursor:pointer;}
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+    .nav-cta{display:none;}
+  }
+  .mobile-menu{
+    display:none; flex-direction:column; padding:0 32px 22px; gap:16px;
+    border-bottom:1px solid var(--line); background:rgba(11,14,19,0.98);
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-size:15px; color:var(--ink-dim); padding:4px 0;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; justify-content:center;
+    padding:120px 0 80px; position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      repeating-linear-gradient(to bottom, transparent, transparent 39px, var(--line) 40px),
+      repeating-linear-gradient(to right, transparent, transparent 39px, var(--line) 40px);
+    mask-image:radial-gradient(ellipse 60% 50% at 50% 30%, black, transparent 75%);
+    opacity:0.55;
+  }
+  .hero-inner{max-width:var(--maxw); margin:0 auto; padding:0 32px; position:relative;}
+  .hero .eyebrow{margin-bottom:26px;}
+  .hero h1{
+    font-size:clamp(34px, 5.4vw, 66px);
+    line-height:1.05;
+    max-width:15ch;
+    font-weight:500;
+  }
+  .hero h1 em{font-style:normal; color:var(--brass-bright); font-weight:600;}
+  .hero-line{
+    width:100%; max-width:640px; height:2px; margin:34px 0 30px; overflow:hidden;
+  }
+  .hero-line path{
+    stroke:var(--brass); stroke-width:2; fill:none;
+    stroke-dasharray:640; stroke-dashoffset:640;
+    animation:draw 1.6s ease-out .3s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .hero-meta{color:var(--ink-dim); font-size:15.5px; max-width:52ch; margin-bottom:10px;}
+  .hero-meta strong{color:var(--ink); font-weight:500;}
+  .hero-tags{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.08em; color:var(--brass);
+    margin:22px 0 38px; text-transform:uppercase;
+    list-style:none; padding:0; display:flex; flex-wrap:wrap; row-gap:10px; column-gap:26px;
+  }
+  .hero-tags li{position:relative; padding-left:16px;}
+  .hero-tags li::before{content:"●"; position:absolute; left:0; top:0.05em; font-size:7px; color:var(--brass-dim);}
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.05em;
+    padding:14px 26px; border:1px solid var(--brass-dim); color:var(--brass-bright);
+    transition:all .2s; display:inline-flex; align-items:center; gap:10px;
+  }
+  .btn:hover{background:var(--brass); color:var(--bg); border-color:var(--brass);}
+  .btn.ghost{border-color:var(--line-strong); color:var(--ink-dim);}
+  .btn.ghost:hover{border-color:var(--ink-dim); color:var(--ink); background:none;}
+
+  /* ---------- generic section spacing ---------- */
+  .section{padding:110px 0;}
+  .section-head{max-width:640px; margin-bottom:64px;}
+  .section-head h2{font-size:clamp(26px,3.2vw,40px); line-height:1.15;}
+  .section.alt{background:var(--bg-panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:70px; align-items:start;}
+  .about-grid p{color:var(--ink-dim); font-size:16px; margin:0 0 18px;}
+  .about-grid strong{color:var(--ink); font-weight:600;}
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);}
+  .stat{background:var(--bg); padding:26px 22px;}
+  .stat .num{font-family:var(--serif); font-size:34px; color:var(--brass-bright);}
+  .stat .lbl{font-family:var(--mono); font-size:11px; letter-spacing:0.06em; color:var(--ink-faint); text-transform:uppercase; margin-top:6px;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr; gap:36px;}}
+
+  /* ---------- expertise ---------- */
+  .pillar-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .pillar{background:var(--bg); padding:40px 38px;}
+  .pillar svg{width:30px; height:30px; stroke:var(--brass); margin-bottom:22px;}
+  .pillar h3{font-size:20px; margin-bottom:12px; font-weight:500;}
+  .pillar p{color:var(--ink-dim); font-size:14.5px; margin:0;}
+  @media (max-width:700px){.pillar-grid{grid-template-columns:1fr;}}
+
+  /* ---------- trajectory (signature element) ---------- */
+  .traj{display:flex; align-items:flex-end; gap:0; margin-top:70px; position:relative;}
+  .traj::before{content:""; position:absolute; left:0; right:0; bottom:56px; height:1px; background:var(--line);}
+  .node{flex:1; position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .node .dot{
+    width:11px; height:11px; border-radius:50%; background:var(--bg);
+    border:2px solid var(--sage); margin-bottom:56px; position:relative; z-index:2;
+    box-shadow:0 0 0 5px var(--bg);
+  }
+  .node:last-child .dot{background:var(--sage); border-color:var(--sage);}
+  .node .idx{font-family:var(--mono); font-size:11px; color:var(--brass); margin-bottom:6px;}
+  .node h4{font-size:15px; font-weight:600; margin-bottom:6px; max-width:16ch;}
+  .node p{font-size:12.5px; color:var(--ink-dim); max-width:18ch; margin:0;}
+  .node:nth-child(1) .dot{margin-bottom:8px;}
+  .node:nth-child(2) .dot{margin-bottom:18px;}
+  .node:nth-child(3) .dot{margin-bottom:28px;}
+  .node:nth-child(4) .dot{margin-bottom:36px;}
+  .node:nth-child(5) .dot{margin-bottom:44px;}
+  .node:nth-child(6) .dot{margin-bottom:50px;}
+  .node:nth-child(7) .dot{margin-bottom:56px;}
+  @media (max-width:900px){
+    .traj{flex-direction:column; align-items:flex-start; gap:34px;}
+    .traj::before{left:5px; right:auto; top:0; bottom:0; width:1px; height:100%;}
+    .node{flex-direction:row; text-align:left; align-items:flex-start; gap:20px;}
+    .node .dot{margin:5px 0 0 !important;}
+    .node h4, .node p{max-width:none;}
+  }
+
+  /* ---------- academia / media ---------- */
+  .media-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .media-card{background:var(--bg); padding:32px; min-height:180px; display:flex; flex-direction:column; justify-content:space-between;}
+  .media-card .tag{font-family:var(--mono); font-size:11px; letter-spacing:0.06em; color:var(--brass); text-transform:uppercase; margin-bottom:16px;}
+  .media-card h3{font-size:17px; margin-bottom:8px; font-weight:600;}
+  .media-card p{font-size:13.5px; color:var(--ink-dim); margin:0;}
+  @media (max-width:900px){.media-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:600px){.media-grid{grid-template-columns:1fr;}}
+  .media-card:last-child{grid-column:1 / -1; flex-direction:row; align-items:center; gap:28px;}
+  .media-card:last-child > div{flex:0 0 auto;}
+  @media (max-width:700px){.media-card:last-child{flex-direction:column; align-items:flex-start; gap:12px;}}
+
+  /* ---------- advisory ---------- */
+  .adv-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .adv-card{background:var(--bg-panel); padding:30px 26px; transition:background .25s;}
+  .adv-card:hover{background:var(--bg-panel-2);}
+  .adv-card .idx{font-family:var(--mono); color:var(--brass); font-size:12px; margin-bottom:18px; display:block;}
+  .adv-card h3{font-size:16.5px; margin-bottom:10px; font-weight:600;}
+  .adv-card p{font-size:13px; color:var(--ink-dim); margin:0;}
+  @media (max-width:900px){.adv-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.adv-grid{grid-template-columns:1fr;}}
+
+  /* ---------- community ---------- */
+  .comm-list{display:flex; flex-direction:column;}
+  .comm-row{
+    display:grid; grid-template-columns:280px 1fr; gap:40px; padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .comm-row:last-child{border-bottom:1px solid var(--line);}
+  .comm-row h3{font-size:17px; font-weight:600; color:var(--brass-bright);}
+  .comm-row p{margin:0; color:var(--ink-dim); font-size:14.5px;}
+  @media (max-width:700px){.comm-row{grid-template-columns:1fr; gap:8px;}}
+
+  /* ---------- philosophy ---------- */
+  .phil-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:44px; margin-bottom:70px;}
+  .phil-step .idx{font-family:var(--mono); font-style:normal; font-weight:600; font-size:34px; letter-spacing:0.02em; color:var(--brass-dim); line-height:1;}
+  .phil-step h3{font-size:19px; margin:14px 0 10px; font-weight:600;}
+  .phil-step p{font-size:14px; color:var(--ink-dim); margin:0;}
+  blockquote{
+    font-family:var(--sans); font-style:italic; font-weight:400;
+    font-size:clamp(20px,2.6vw,28px); line-height:1.5; color:var(--ink);
+    border-left:2px solid var(--brass); padding-left:32px; margin:0; max-width:820px;
+  }
+  @media (max-width:800px){.phil-steps{grid-template-columns:1fr; gap:30px;}}
+
+  /* ---------- contact ---------- */
+  .contact-panel{
+    background:var(--bg-panel); border:1px solid var(--line-strong);
+    padding:70px 60px; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-panel h2{font-size:clamp(26px,3.6vw,42px); max-width:18ch; margin:0 auto 20px;}
+  .contact-panel > p{color:var(--ink-dim); max-width:56ch; margin:0 auto 40px; font-size:15.5px;}
+  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  @media (max-width:700px){.contact-panel{padding:50px 26px;}}
+
+  footer{padding:44px 0; border-top:1px solid var(--line);}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  footer p{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin:0;}
+</style>
+</head>
+<body>
+
+  <div class="ticker-bar">
+    <div class="ticker-track" id="tickerTrack">
+      <span>
+        <b>PH.D. &amp; M.A.</b> COLUMBIA BUSINESS SCHOOL
+        <b>·</b> FOUNDER &amp; CEO, DARIOHEALTH <b>(NASDAQ: DRIO)</b>
+        <b>·</b> FACULTY, YALE INTERNATIONAL CENTER FOR FINANCE
+        <b>·</b> 30+ GRANTED PATENTS
+        <b>·</b> ADVISOR TO FORTUNE 100
+        <b>·</b> AUTHOR, <i>FROM CONCEPT TO WALL STREET</i>
+        <b>·</b>
+      </span>
+      <span>
+        <b>PH.D. &amp; M.A.</b> COLUMBIA BUSINESS SCHOOL
+        <b>·</b> FOUNDER &amp; CEO, DARIOHEALTH <b>(NASDAQ: DRIO)</b>
+        <b>·</b> FACULTY, YALE INTERNATIONAL CENTER FOR FINANCE
+        <b>·</b> 30+ GRANTED PATENTS
+        <b>·</b> ADVISOR TO FORTUNE 100
+        <b>·</b> AUTHOR, <i>FROM CONCEPT TO WALL STREET</i>
+        <b>·</b>
+      </span>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="wordmark">Fuers<span>tech</span></a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#trajectory">Track Record</a>
+        <a href="#academia">Academia</a>
+        <a href="#advisory">Advisory</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="mailto:oren@fuerstech.com" class="nav-cta">Get in touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#trajectory">Track Record</a>
+      <a href="#academia">Academia</a>
+      <a href="#advisory">Advisory</a>
+      <a href="#community">Community</a>
+      <a href="mailto:oren@fuerstech.com">Get in touch</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Dr. Oren Fuerst · Fuerstech</div>
+        <h1>Where deep <em>intelligence</em> meets transformative capital.</h1>
+        <div class="hero-line">
+          <svg viewBox="0 0 640 2" preserveAspectRatio="none" width="100%" height="2">
+            <path d="M0,1 L640,1"></path>
+          </svg>
+        </div>
+        <p class="hero-meta">
+          <strong>Ph.D. &amp; M.A., Columbia Business School</strong> — former Director, Technology Strategy &amp; Valuation Program.
+          Faculty, Yale International Center for Finance.
+        </p>
+        <ul class="hero-tags">
+          <li>Inventor</li>
+          <li>Entrepreneur</li>
+          <li>Strategist</li>
+          <li>Writer</li>
+          <li>Keynote Speaker</li>
+        </ul>
+        <div class="hero-ctas">
+          <a href="mailto:oren@fuerstech.com" class="btn">Email Dr. Fuerst →</a>
+          <a href="https://www.linkedin.com/in/orenfuerst" target="_blank" rel="noopener" class="btn ghost">Connect on LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="fade">
+            <div class="eyebrow">About</div>
+            <h2 style="margin-bottom:26px;">The meta strategist</h2>
+            <p>Dr. Fuerst operates as a <strong>meta strategist</strong> — moving fluidly between building ventures,
+              structuring capital, and advising the institutions that finance them. His work has taken him inside
+              <strong>hedge funds</strong>, family offices, and sovereign-scale institutions, translating deep technical
+              and scientific insight into investable theses and defensible market positions.</p>
+            <p>As founder and CEO of <strong>DarioHealth (NASDAQ: DRIO)</strong> — taken public within two years of founding —
+              he demonstrated the full arc from idea to Wall Street. His work spans advisory to <strong>Fortune 100 companies</strong>,
+              capital markets transactions, and impact initiatives — among them, programs backed by organizations such as
+              the <strong>U.S. Government</strong> and the <strong>Bill &amp; Melinda Gates Foundation</strong>.</p>
+          </div>
+          <div class="fade">
+            <div class="stat-grid">
+              <div class="stat"><div class="num">30+</div><div class="lbl">Granted Patents</div></div>
+              <div class="stat"><div class="num">4</div><div class="lbl">Continents</div></div>
+              <div class="stat"><div class="num">5</div><div class="lbl">Universities</div></div>
+              <div class="stat"><div class="num">$25B+</div><div class="lbl">In Capital Markets Transactions</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section class="section alt" id="expertise">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Expertise</div>
+          <h2>Four pillars of deep domain mastery</h2>
+        </div>
+        <div class="pillar-grid fade">
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+            <h3>Artificial Intelligence</h3>
+            <p>AI product architecture, agentic platforms, multimodal clinical AI, and AI-native business model design — across digital health, consumer platforms and behavioral AI engines.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></svg>
+            <h3>Fintech &amp; Insurtech</h3>
+            <p>Capital markets strategy, financial model design and fintech venture architecture — from structured products and hedge fund strategy to behavioral-AI-powered underwriting, across four continents.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>
+            <h3>Robotics &amp; Industry 4.0</h3>
+            <p>Co-founder, Israeli Intelligent Robotics Center (IIRC). Deep engagement with robotics commercialization, industrial AI and autonomous systems — advisory to Fortune 100 manufacturers and emerging ventures.</p>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M12 21s-7-4.35-9.5-9.1C.7 8.2 2.4 5 5.7 5c1.9 0 3.3 1 4.3 2.4C11 6 12.4 5 14.3 5c3.3 0 5 3.2 3.2 6.9C15 16.65 12 21 12 21z"/></svg>
+            <h3>Healthtech &amp; Digital Health</h3>
+            <p>Pioneer in digital health. Founder of Global Digital Health — <strong>acquired by Becton Dickinson (NYSE: BDX)</strong>. In a separate venture, founder &amp; CEO of <strong>DarioHealth (NASDAQ: DRIO)</strong>. Clinical trial design, FDA pathways, VR therapeutics and multimodal AI diagnostics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAJECTORY (signature element) -->
+    <section class="section" id="trajectory">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Track Record</div>
+          <h2>A trajectory built from scratch</h2>
+        </div>
+        <div class="traj fade">
+          <div class="node">
+            <div class="idx">01</div>
+            <div class="dot"></div>
+            <h4>Columbia Business School</h4>
+            <p>Ph.D. &amp; M.A.; later Director, Technology Strategy &amp; Valuation Program</p>
+          </div>
+          <div class="node">
+            <div class="idx">02</div>
+            <div class="dot"></div>
+            <h4>DarioHealth (NASDAQ: DRIO)</h4>
+            <p>Founded, built and taken public within two years</p>
+          </div>
+          <div class="node">
+            <div class="idx">03</div>
+            <div class="dot"></div>
+            <h4>30+ Patents Granted</h4>
+            <p>AI, biopharma, software &amp; digital health</p>
+          </div>
+          <div class="node">
+            <div class="idx">04</div>
+            <div class="dot"></div>
+            <h4>Global Digital Health</h4>
+            <p>Founded &amp; exited — acquired by Becton Dickinson (NYSE: BDX)</p>
+          </div>
+          <div class="node">
+            <div class="idx">05</div>
+            <div class="dot"></div>
+            <h4>Fortune 100 &amp; Global Impact</h4>
+            <p>Toyota · U.S. Government · Gates Foundation</p>
+          </div>
+          <div class="node">
+            <div class="idx">06</div>
+            <div class="dot"></div>
+            <h4>Academia &amp; Broadcast</h4>
+            <p>Columbia · Yale · Tsinghua · TAU · Technion · Channel 10</p>
+          </div>
+          <div class="node">
+            <div class="idx">07</div>
+            <div class="dot"></div>
+            <h4>Fuerstech Today</h4>
+            <p>AI · Fintech · Robotics · Healthtech — advising funds, founders &amp; corporates</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMIA / MEDIA -->
+    <section class="section alt" id="academia">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Academia &amp; Thought Leadership</div>
+          <h2>Scholar, broadcaster, writer</h2>
+        </div>
+        <div class="media-grid fade">
+          <div class="media-card">
+            <div>
+              <div class="tag">Columbia Business School</div>
+              <h3>Former Director, Technology Strategy &amp; Valuation Program</h3>
+            </div>
+            <p>Founded and directed this landmark program, and created Columbia's first-ever online valuation course, reaching thousands of global learners.</p>
+          </div>
+          <div class="media-card">
+            <div>
+              <div class="tag">Yale University</div>
+              <h3>Faculty, International Center for Finance</h3>
+            </div>
+            <p>Contributed to one of the world's most prestigious finance research institutions — bridging theoretical rigor with capital markets practice.</p>
+          </div>
+          <div class="media-card">
+            <div>
+              <div class="tag">Additional Faculty</div>
+              <h3>Tsinghua · Tel Aviv University · Technion</h3>
+            </div>
+            <p>Tsinghua University Business School (Beijing), TAU Coller School of Management, and the Technion's Data Sciences School.</p>
+          </div>
+          <div class="media-card">
+            <div>
+              <div class="tag">Author</div>
+              <h3>From Concept to Wall Street</h3>
+            </div>
+            <p>FT Prentice-Hall. Widely cited as a reference for entrepreneurs pursuing public markets. Regular contributor to academic journals and global media.</p>
+          </div>
+          <div class="media-card">
+            <div>
+              <div class="tag">Keynote Speaker</div>
+              <h3>Universities &amp; global summits</h3>
+            </div>
+            <p>In-demand speaker at leading universities, investment conferences and innovation summits on AI, Fintech, Robotics and capital markets strategy.</p>
+          </div>
+          <div class="media-card">
+            <div>
+              <div class="tag">Podcast</div>
+              <h3>Global Strategy, Investment &amp; Technology</h3>
+            </div>
+            <p>Curated conversations on markets, AI and innovation, for a worldwide audience. <a href="https://open.spotify.com/show/2RjZ0Bw3A8HYTakwLM4v8M?si=Fd5IE-0lRj2e_-II7e0U2Q" target="_blank" rel="noopener" style="color:var(--brass-bright); text-decoration:underline;">Listen on Spotify →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADVISORY -->
+    <section class="section" id="advisory">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Advisory Services</div>
+          <h2>How Dr. Fuerst engages</h2>
+        </div>
+        <div class="adv-grid fade">
+          <div class="adv-card">
+            <span class="idx">Funds &amp; Investors</span>
+            <h3>Strategy &amp; diligence</h3>
+            <p>Valuation, competitive due diligence, M&amp;A advisory, asset allocation and AI-driven investment thesis development for hedge funds, family offices, VCs and PE firms.</p>
+          </div>
+          <div class="adv-card">
+            <span class="idx">Technology Founders</span>
+            <h3>Build &amp; raise</h3>
+            <p>Go-to-market strategy, fundraising narrative, investor materials, financial modeling, IP strategy and board advisory — seed through growth.</p>
+          </div>
+          <div class="adv-card">
+            <span class="idx">Corporates &amp; Boards</span>
+            <h3>Transform</h3>
+            <p>Digital transformation strategy, AI product integration roadmaps, innovation scouting and strategic partnerships at Fortune 100 scale.</p>
+          </div>
+          <div class="adv-card">
+            <span class="idx">Public Organizations</span>
+            <h3>Impact at scale</h3>
+            <p>Impact investment strategy, global technology programs and public-private partnership design, with experience across governments and foundations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="section alt" id="community">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Community &amp; Impact</div>
+          <h2>Global reach, mentorship &amp; mission-driven leadership</h2>
+        </div>
+        <div class="comm-list fade">
+          <div class="comm-row">
+            <h3>Tevel Angels &amp; Tevel Global</h3>
+            <p>Co-Founder — global investor network and innovation hub focused on Israeli technologies, active across the U.S. and Europe.</p>
+          </div>
+          <div class="comm-row">
+            <h3>IIRC — Israeli Intelligent Robotics Center</h3>
+            <p>Co-Founder — driving the commercialization of intelligent robotics at the intersection of industry and academia.</p>
+          </div>
+          <div class="comm-row">
+            <h3>Global Imagine</h3>
+            <p>Co-Founder — technologies for underprivileged populations worldwide, delivering solutions to low-resource settings.</p>
+          </div>
+          <div class="comm-row">
+            <h3>Mentorship &amp; Board Leadership</h3>
+            <p>Microsoft Ventures · ARC Sheba · Israel Brain Technologies (IBT) · American Friends of Sheba Medical Center and mission-driven NGOs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head fade">
+          <div class="eyebrow">Philosophy</div>
+          <h2>The Fuerstech philosophy</h2>
+        </div>
+        <div class="phil-steps fade">
+          <div class="phil-step">
+            <div class="idx">01</div>
+            <h3>Invent</h3>
+            <p>30+ patents. Originating ideas that define entirely new categories across AI, biopharma, digital health and software.</p>
+          </div>
+          <div class="phil-step">
+            <div class="idx">02</div>
+            <h3>Build</h3>
+            <p>Founding and scaling ventures from concept to a NASDAQ-listed company — the full arc of value creation.</p>
+          </div>
+          <div class="phil-step">
+            <div class="idx">03</div>
+            <h3>Transform</h3>
+            <p>Advising Fortune 100s, funds and governments to reshape entire industries at the frontier of technology and capital.</p>
+          </div>
+        </div>
+        <blockquote class="fade">
+          Fuerstech is not a traditional advisory firm. It is a platform for compounding advantage — where deep
+          scientific knowledge, real entrepreneurial experience and global capital networks converge to create
+          disproportionate outcomes for the founders, funds and organizations who engage with Dr. Fuerst.
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-panel fade">
+          <div class="eyebrow" style="justify-content:center;">Connect</div>
+          <h2>Ready to build something extraordinary?</h2>
+          <p>Dr. Oren Fuerst engages selectively with founders, funds and organizations operating at the frontier of
+            AI, Fintech, Robotics and Healthtech. If you are building something that matters — and need a partner
+            who has done it before — the conversation starts here.</p>
+          <div class="contact-links">
+            <a href="mailto:oren@fuerstech.com" class="btn">✉ oren@fuerstech.com</a>
+            <a href="https://www.linkedin.com/in/orenfuerst" target="_blank" rel="noopener" class="btn ghost">in/orenfuerst</a>
+            <a href="https://open.spotify.com/show/2RjZ0Bw3A8HYTakwLM4v8M?si=Fd5IE-0lRj2e_-II7e0U2Q" target="_blank" rel="noopener" class="btn ghost">♫ Spotify Podcast</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© <span id="year"></span> Dr. Oren Fuerst — Fuerstech.</p>
+      <p>AI · Fintech · Robotics · Healthtech</p>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var navToggle = document.getElementById('navToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', function(){
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    document.querySelectorAll('.fade').forEach(function(el){ obs.observe(el); });
+  } else {
+    document.querySelectorAll('.fade').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>
